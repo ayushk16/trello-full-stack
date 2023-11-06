@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.home-icon:hover{
+    cursor: pointer;
+    z-index: 2;
+    color: #fff;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.trello-main-logo{
+    font-family: 'Poppins', sans-serif;
+}
+
+.trelloLogo{
+    width: 150px;
+  height: 25px;
+  position: relative;
+  padding: 8px 0;
+  margin: 0;
+  opacity: 1;
+  filter: brightness(0) saturate(100%) invert(30%) sepia(53%) saturate(323%) hue-rotate(179deg) brightness(91%) contrast(88%);
+
+}
+
+.trelloLogo::before{
+    content: '';
+  background-image: url(https://trello.com/assets/d947df93bc055849898e.gif);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.list-card:hover{
+  cursor: pointer;
+}

@@ -1,0 +1,121 @@
+BOARDS
+
+- get boards:
+  GET
+  https://api.trello.com/1/members/me/boards
+
+  http://localhost:3000/boards/
+
+- get board:
+  GET
+  https://api.trello.com/1/boards/${boardId}
+
+  http://localhost:3000/boards/1
+
+- add board:
+  POST
+  https://api.trello.com/1/boards/
+  query params =
+  name : 'als'
+
+  http://localhost:3000/boards?name=NewBoard
+
+LISTS
+
+- get lists:
+  GET
+  https://api.trello.com/1/boards/${boardId}/lists
+
+  http://localhost:3000/boards/2/lists
+
+- archieve list :
+  PUT
+  https://api.trello.com/1/lists/${listId}/closed
+  query params =
+  value: true;
+
+  http://localhost:3000/lists/3/closed?value=true
+
+- add list :
+  POST
+  https://api.trello.com/1/lists`
+  params =
+  name : 'als'
+  idBoard: 'alsdwfa542'
+
+  http://localhost:3000/lists?name=newlist&idBoard=2
+
+CARDS
+
+- get card :
+  GET
+  https://api.trello.com/1/cards/${cardId}
+
+  http://localhost:3000/cards/1
+
+- get cards :
+  GET
+  https://api.trello.com/1/lists/${listId}/cards
+
+  http://localhost:3000/lists/4/cards
+
+- add cards :
+  POST
+  https://api.trello.com/1/cards
+  params =
+  name : 'asdfjk'
+  idList: 'asdfj23oja'
+
+  http://localhost:3000/cards?name=newcard&idList=1
+
+- delete cards :
+  DELETE
+  https://api.trello.com/1/cards/${cardId}
+
+  http://localhost:3000/cards/2
+
+CHECKLIST
+
+- get checklist:
+  GET
+  https://api.trello.com/1/cards/${cardId}/checklists
+
+  http://localhost:3000/cards/1/checklists
+
+- add checklist:
+  POST
+  https://api.trello.com/1/cards/${cardId}/checklists
+  params:
+  name : 'asdfl'
+
+  http://localhost:3000/cards/1/checklists?name=ayushs card
+
+- delete check
+  DELETE
+  https://api.trello.com/1/checklists/${checkListId}
+
+  http://localhost:3000/checklists/1
+
+CHECKITEM
+
+- add checkitem:
+  POST
+  https://api.trello.com/1/checklists/${checkListId}/checkItems
+  params:
+  name : 'asdfl'
+
+  http://localhost:3000/checklists/2/checkitems?name=ayushs checkitem
+
+- delete checkitem:
+  DELETE
+  https://api.trello.com/1/checklists/${checkListId}/checkItems/${checkItemId}
+
+  http://localhost:3000/checklists/2/checkItems/2
+
+- update checkitem:
+  PUT
+  https://api.trello.com/1/cards/${cardId}/checkItem/${checkItemId}
+  params:
+  state: 'complete/incomplete
+
+  http://localhost:3000/cards/1/checkItem/3?state=incomplete
