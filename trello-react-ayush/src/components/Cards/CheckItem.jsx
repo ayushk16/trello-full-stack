@@ -42,6 +42,7 @@ const CheckItem = ({
   };
 
   const deleteACheckItem = ({ checkListId, checkItemId }) => {
+    // console.log({ checkListId, checkItemId });
     dispatch(deleteCheckItem({ checkListId, checkItemId }));
   };
 

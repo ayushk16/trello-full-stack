@@ -14,6 +14,7 @@ import { router as boardRouter } from './routes/boardsRouter.js';
 import { router as listRouter } from './routes/listsRouter.js';
 import { router as cardRouter } from './routes/cardRouter.js';
 import { router as checkListRouter } from './routes/checkListRouter.js';
+import { router as testRouter } from './routes/testRouter.js';
 import { getBoards } from "./controllers/boardController.js";
 const app = express();
 
@@ -50,6 +51,7 @@ app.use("/boards", boardRouter);
 app.use("/lists", listRouter);
 app.use("/cards", cardRouter);
 app.use("/checklists", checkListRouter);
+app.use("/test", testRouter);
 
 app.all('*', (req, res, next) => {
     const error = new Error(`can't find ${req.originalUrl} on the server.`);

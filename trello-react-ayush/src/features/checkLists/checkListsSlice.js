@@ -64,7 +64,7 @@ export const addCheckItem = createAsyncThunk('checkLists/addCheckItem', ({ check
     return axios({
         method: 'POST',
         // url: `https://api.trello.com/1/checklists/${checkListId}/checkItems`,
-        url : `http://localhost:3000/checklists/${checkListId}/checkitems`,
+        url: `http://localhost:3000/checklists/${checkListId}/checkitems`,
         params: {
             name: value,
             // key: import.meta.env.VITE_API_KEY,
@@ -77,10 +77,10 @@ export const addCheckItem = createAsyncThunk('checkLists/addCheckItem', ({ check
 })
 
 export const deleteCheckItem = createAsyncThunk('checkLists/deleteCheckItem', ({ checkListId, checkItemId }) => {
+    console.log(checkListId, checkItemId)
     return axios({
         method: 'DELETE',
-        // url: `https://api.trello.com/1/checklists/${checkListId}/checkItems/${checkItemId}`,
-        url :  `http://localhost:3000/checklists/${checkListId}/checkItems/${{checkItemId}}`,
+        url: `http://localhost:3000/checklists/${checkListId}/checkItems/${checkItemId}`,
         params: {
             // key: import.meta.env.VITE_API_KEY,
             // token: import.meta.env.VITE_TOKEN,
@@ -94,7 +94,7 @@ export const deleteCheckItem = createAsyncThunk('checkLists/deleteCheckItem', ({
 export const updateCheckItem = createAsyncThunk('checkLists/updateCheckItem', ({ cardId, checkListId, checkItemId, checkedStatus }) => {
     return axios({
         method: 'PUT',
-        url: `https://api.trello.com/1/cards/${cardId}/checkItem/${checkItemId}`,
+        url: `http://localhost:3000/cards/${cardId}/checkItem/${checkItemId}`,
         params: {
             state: checkedStatus ? 'complete' : 'incomplete',
             key: import.meta.env.VITE_API_KEY,

@@ -7,11 +7,11 @@ export let cardSchema = (sequelize, DataTypes) => {
             allowNull: false,
         },
         idBoard: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         idList: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
     }, {

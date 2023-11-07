@@ -46,19 +46,25 @@ db.card = cardSchema(sequelize, DataTypes);
 db.checkList = checkListSchema(sequelize, DataTypes);
 db.checkItem = checkItemSchema(sequelize, DataTypes);
 
-db.board.hasMany(db.list, { foreignKey: 'idBoard' });
+db.board.hasMany(db.list, { foreignKey: 'idBoard', onDelete: 'cascade' });
 db.list.belongsTo(db.board, { foreignKey: 'idBoard' });
 
-// db.list.hasMany(db.card, { foreignKey: 'idList' });
-// db.card.belongsTo(db.list, { foreignKey: 'idList' });
+db.board.hasMany(db.card, { foreignKey: 'idBoard', onDelete: 'cascade' });
+db.card.belongsTo(db.board, { foreignKey: 'idBoard' });
 
-// db.card.hasMany(db.checkList, { foreignKey: 'idCard' });
-// db.checkList.belongsTo(db.card, { foreignKey: 'idCard' });
+db.board.hasMany(db.checkList, { foreignKey: 'idBoard', onDelete: 'cascade' });
+db.checkList.belongsTo(db.board, { foreignKey: 'idBoard' });
 
-// db.checkList.hasMany(db.checkItem, { foreignKey: 'idCheckList' });
-// db.checkItem.belongsTo(db.checkList, { foreignKey: 'idCheckList' });
+db.list.hasMany(db.card, { foreignKey: 'idList', onDelete: 'cascade' });
+db.card.belongsTo(db.list, { foreignKey: 'idList' });
 
-db.sequelize.sync({ force: true })
+db.card.hasMany(db.checkList, { foreignKey: 'idCard', onDelete: 'cascade' });
+db.checkList.belongsTo(db.card, { foreignKey: 'idCard' });
+
+db.checkList.hasMany(db.checkItem, { foreignKey: 'idCheckList', onDelete: 'cascade' });
+db.checkItem.belongsTo(db.checkList, { foreignKey: 'idCheckList' });
+
+db.sequelize.sync({ alter: true })
     .then(() => {
         console.log('synced to db ...');
     })

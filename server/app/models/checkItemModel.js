@@ -7,7 +7,7 @@ export let checkItemSchema = (sequelize, DataTypes) => {
             allowNull: false,
         },
         idCheckList: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         state: {

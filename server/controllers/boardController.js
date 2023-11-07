@@ -20,76 +20,78 @@ const bgColors = [
 
 export const getBoard = async (req, res, next) => {
     const boardId = req.params.id;
-    // const board = {
-    //     id: boardId,
-    //     name: 'board1',
-    //     backgroundImage: 'https://picsum.photos/200/300',
-    //     backgroundColor: '#ffffff',
-    // }
-    let board = await boardModel.findOne({ where: { id: boardId } });
-    if (!board) {
-        const error = new Error('board not found');
-        error.status = `board with id ${boardId} not found`;
-        error.statusCode = 404;
-        next(error);
-    }
-    else {
-        const boardData = {
-            id: board.id,
-            name: board.name,
-            prefs: {
-                backgroundImage: board.backgroundImage,
-                backgroundColor: board.backgroundColor,
-
-            }
+    try {
+        let board = await boardModel.findOne({ where: { id: boardId } });
+        if (!board) {
+            const error = new Error('board not found');
+            error.status = `board with id ${boardId} not found`;
+            error.statusCode = 404;
+            throw (error);
         }
-        res.status(200).json(board);
+        else {
+            const boardData = {
+                id: board.id,
+                name: board.name,
+                prefs: {
+                    backgroundImage: board.backgroundImage,
+                    backgroundColor: board.backgroundColor,
+
+                }
+            }
+            res.status(200).json(boardData);
+        }
+    } catch (error) {
+        const Error = error;
+        Error.status = `board with id ${boardId} not found` || error.status;
+        Error.statusCode = 404 || error.statusCode;
+        next(Error);
     }
 }
 
 export const getBoards = async (req, res) => {
-    // const boards = [{
-    //     id: 1,
-    //     name: 'board1',
-    //     backgroundImage: 'https://picsum.photos/200/300',
-    //     backgroundColor: '#ffffff',
-    // },
-    // {
-    //     id: 2,
-    //     name: 'board2',
-    //     backgroundImage: 'https://picsum.photos/200/300',
-    //     backgroundColor: '#ffffff'
-    // }]
-    let boards = await boardModel.findAll();
-    if (!boards) {
-        boards = [];
-        res.status(200).json(boards);
-    }
-    else {
-        const boardsData = [];
-        boards.forEach(boardData => {
-            boardsData.push({
-                id: boardData.id,
-                name: boardData.name,
-                prefs: {
-                    backgroundImage: boardData.backgroundImage,
-                    backgroundColor: boardData.backgroundColor,
+    try {
+        let boards = await boardModel.findAll();
+        if (!boards) {
+            boards = [];
+            res.status(200).json(boards);
+        }
+        else {
+            const boardsData = [];
+            boards.forEach(boardData => {
+                boardsData.push({
+                    id: boardData.id,
+                    name: boardData.name,
+                    prefs: {
+                        backgroundImage: boardData.backgroundImage,
+                        backgroundColor: boardData.backgroundColor,
 
-                }
+                    }
+                })
             })
-        })
-
-
-        res.status(200).json(boardsData);
+            res.status(200).json(boardsData);
+        }
+    } catch (error) {
+        const Error = error;
+        Error.status = 'boards not found' || error.status;
+        Error.statusCode = 404 || error.statusCode;
+        next(Error);
     }
+
 }
 
 export const addBoard = async (req, res) => {
-    const newBoard = {
-        name: req.query.name,
-        backgroundImage: bgImages[Math.floor(Math.random() * bgImages.length)],
-        backgroundColor: bgColors[Math.floor(Math.random() * bgColors.length)],
+    try {
+        const newBoard = {
+            name: req.query.name,
+            backgroundImage: bgImages[Math.floor(Math.random() * bgImages.length)],
+            backgroundColor: bgColors[Math.floor(Math.random() * bgColors.length)],
+        }
+        const resBoard = await boardModel.create(newBoard);
+        res.json(resBoard);
+    } catch (error) {
+        const Error = error;
+        Error.status = 'board not created' || error.status;
+        Error.statusCode = 500 || error.statusCode;
+        next(Error);
     }
-    const resBoard = await boardModel.create(newBoard);
-    res.json(resBoard);
 }

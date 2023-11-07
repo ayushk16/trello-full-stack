@@ -7,11 +7,11 @@ export let checkListSchema = (sequelize, DataTypes) => {
             allowNull: false,
         },
         idCard: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         idBoard: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
     }, {
